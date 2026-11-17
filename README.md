@@ -15,6 +15,10 @@ Numbers, names and decisions survive almost every time. The *nuance* doesn't:
 - **Polish adds words, not facts.** The fancy email was on average 2.5× longer than the original (258 vs 102 words). It got slightly fewer facts to the reader (7.9 vs 8.6 of 13; the difference is not statistically significant).
 - **Polish adds things nobody said.** Summaries of fancy emails contained 1.5 invented claims on average, against 0.8 for the original text (permutation test, p ≈ 0.02). Examples: "a review is underway", "the audit was successful".
 
+One real run, start to finish:
+
+<img src="images/6-one-run.png" width="70%" alt="Four sentences in, a 238 word AI email, four bullets out, with each change marked">
+
 <p>
 <img src="images/1-should-will.png" width="49%" alt="Should becomes will in 29 of 30 AI emails">
 <img src="images/2-what-survived.png" width="49%" alt="Which facts survived the summary">

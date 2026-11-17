@@ -206,13 +206,56 @@ h1{font-size:76px;margin-top:22px}.tag{font-size:30px;color:var(--muted);margin-
 """)
 
 
+# G: one real run, start to finish (portrait 1200x1500) ------------------------
+page("6-one-run", """
+html,body{height:1500px}body{padding:72px 80px}
+h1{font-size:54px}
+.sec{margin-top:30px;display:grid;gap:10px}
+.sec .lab{font:500 19px var(--m);letter-spacing:.07em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between}
+.mine{background:var(--paper);border:2px solid var(--you);border-radius:8px;padding:20px 24px;font:400 23px/1.45 var(--d)}
+.mine p{margin:0 0 8px}.mine p:last-child{margin:0}
+.mail{position:relative;background:var(--paper);border:2px solid var(--line);border-radius:8px;padding:20px 24px;
+font:400 23px/1.45 var(--d);color:var(--muted);height:210px;overflow:hidden}
+.mail::after{content:"";position:absolute;inset:auto 0 0 0;height:110px;background:linear-gradient(transparent,var(--paper))}
+.mail b{color:var(--ink);font-weight:600}
+.more{position:absolute;right:16px;bottom:12px;z-index:1;font:500 19px var(--m);color:var(--ai);background:var(--paper);border:2px solid var(--ai);border-radius:5px;padding:4px 10px}
+.got{display:grid;gap:12px}
+.b{display:grid;grid-template-columns:1fr 250px;gap:20px;align-items:start;background:var(--paper);border:2px solid var(--line);
+border-radius:8px;padding:16px 20px;font:400 23px/1.4 var(--d)}
+.tag{font:500 18px/1.35 var(--m);padding:6px 10px;border-radius:5px;border:2px solid}
+.ok{color:var(--you);border-color:var(--you)}.bad{color:var(--ai);border-color:var(--ai)}
+""", """
+<span class="eyebrow">One real run, start to finish · Sonnet</span>
+<h1>Four sentences in. Four bullets out. Spot the difference.</h1>
+<div class="sec"><div class="lab"><span>1 · What I wrote (shortened here)</span><span>101 words</span></div>
+<div class="mine">
+<p>4–6% of units show a fault in early testing. Extra module tests before assembly <b>should</b> address this.</p>
+<p>Nordic churn is up, mostly small accounts. Sales thinks it's the price change <b>rather than the product</b>.</p>
+<p>We'll pause the Nordtak contract, <b>because switching mid-year would delay Q2 by about two months</b>.</p>
+<p>Anna Jónsdóttir takes over Reykjavík after the current lead finishes the ISO audit.</p></div></div>
+<div class="sec"><div class="lab"><span>2 · What the AI email said</span><span style="color:var(--ai)">238 words</span></div>
+<div class="mail"><b>Subject: Company Update: Quality Findings, Nordic Market, Supplier Strategy, and Reykjavík Leadership</b><br>
+Dear Colleagues, I am writing to share several important updates across our operations, markets, and leadership.
+Thank you, as always, for your continued dedication and hard work. Our recent analysis identified that 4–6% of units
+show a fault during early testing following assembly. To address this, we will introduce additional module tests…
+<span class="more">+ 190 more words</span></div></div>
+<div class="sec"><div class="lab"><span>3 · What the reader's AI gave them</span><span>4 bullets</span></div>
+<div class="got">
+<div class="b"><span>Early testing shows 4–6% of assembled units are faulty, so module tests <b>will be added</b> before assembly.</span><span class="tag bad">changed: “should” became “will”</span></div>
+<div class="b"><span>Nordic churn is rising among small accounts, which sales attributes to the recent price change.</span><span class="tag bad">lost: “not the product”</span></div>
+<div class="b"><span>The Nordtak supplier contract will be paused rather than cancelled to protect the Q2 production ramp.</span><span class="tag bad">lost: the two-month delay</span></div>
+<div class="b"><span>Anna Jónsdóttir will lead the Reykjavík office after the current lead completes the ISO certification audit.</span><span class="tag ok">kept</span></div>
+</div></div>
+""")
+
+
 def shoot():
     prof = HERE / ".ffprofile"  # snap Firefox can't read profiles in /tmp
     prof.mkdir(exist_ok=True)
     if True:
         for f in sorted(HERE.glob("*.html")):
             out = f.with_suffix(".png")
-            subprocess.run(["firefox", "--headless", "--no-remote", "--profile", str(prof), "--window-size", "1280,640" if f.stem == "social-preview" else "1200,1200",
+            subprocess.run(["firefox", "--headless", "--no-remote", "--profile", str(prof), "--window-size", {"social-preview": "1280,640", "6-one-run": "1200,1500"}.get(f.stem, "1200,1200"),
                             "--screenshot", str(out), f.resolve().as_uri()], check=True, capture_output=True, timeout=90)
             print("wrote", out)
 
