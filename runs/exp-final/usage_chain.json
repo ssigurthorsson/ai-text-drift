@@ -1,0 +1,23 @@
+{
+  "total_usd": 1.7095,
+  "by_model": {
+    "claude-haiku-5-5": {
+      "calls": 40,
+      "input": 33053,
+      "output": 7852,
+      "usd": 0.009795960000000006
+    },
+    "claude-opus-5-5": {
+      "calls": 100,
+      "input": 150978,
+      "output": 46858,
+      "usd": 1.5324221999999996
+    },
+    "claude-sonnet-5-5": {
+      "calls": 40,
+      "input": 32116,
+      "output": 7774,
+      "usd": 0.16730140000000004
+    }
+  }
+}

@@ -1,0 +1,20 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Firefox profile used by images/make_images.py for headless screenshots
+images/.ffprofile/
+
+# Generated HTML sources for the images (rebuilt by make_images.py)
+images/*.html
+
+# Run logs and scratch runs
+*.log
+runs/exp-smoke/
+runs/20261117-183720/
+runs/20261117-184619/
+
+# Local artifacts
+pr_body.md
+.DS_Store
